@@ -1,0 +1,22 @@
+.lane-ctn{
+    display: grid;
+    grid-template-columns: 40% 30% 30%;
+    column-gap: 0;
+    background-color: #DFE6EC;
+    padding: 2rem 2rem;
+}
+.lane-ctn .input-ctn{
+    padding: 0rem 2rem;
+    border-right: 1px solid #0A2540;
+}
+.lane-ctn .input-ctn:last-child{
+    border-right: 0;
+}
+.lane-ctn .input-ctn h4{
+    margin-bottom: 2rem;
+}
+.lane-ctn .input-ctn input{
+    border: 0;
+    background-color: transparent;
+    color: #0A2540;
+}

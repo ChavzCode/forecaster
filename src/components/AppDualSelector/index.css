@@ -1,0 +1,19 @@
+.selector-ctn{
+    display: flex;
+}
+.selector-ctn button{
+    width: 100%;
+    color: #F6F9FC;
+    background-color: #0A2540;
+    border: 0;
+    border-radius: 1rem 0 0 0;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.5);
+}
+.selector-ctn :last-child{
+    color: red;
+    background-color: #F6F9FC;
+    color: #0A2540;
+    border-radius: 0 0 1rem 0;
+    box-shadow: none;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+}

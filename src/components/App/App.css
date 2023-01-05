@@ -1,0 +1,22 @@
+#app-root{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: calc(100% - 15rem);
+    height: 100%;
+}
+.app-ctn{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    padding: 3rem;
+    margin: 0 8rem 0 4rem;
+    column-gap: 4rem;
+    row-gap: 4rem;
+}
+.app-ctn h1{
+    font-size: 4rem;
+    font-weight: 500;
+    color: #0A2540;
+    letter-spacing: -1.5px;
+    margin: 0;
+}
