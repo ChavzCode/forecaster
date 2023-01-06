@@ -7,10 +7,10 @@
 }
 .app-ctn{
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 65% 30%;
     padding: 3rem;
     margin: 0 8rem 0 4rem;
-    column-gap: 4rem;
+    column-gap: 10rem;
     row-gap: 4rem;
 }
 .app-ctn h1{

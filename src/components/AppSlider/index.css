@@ -1,0 +1,27 @@
+.slider-ctn{
+    justify-content: center;
+    text-align: center;
+    border-bottom: 1px solid #707070;
+    margin: 0 4rem;
+    padding: 2rem 0 4rem 0;
+    max-width: 100%;
+}
+.slider-ctn input[type="number"]{
+    border: 0;
+    background-color: transparent;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #F6F9FC;
+    width: 100%;
+}
+.slider-ctn h4{
+    margin: 1rem 0;
+    color: #F6F9FC;
+    font-weight: 300;
+    font-size: 1.3rem;
+}
+.slider-ctn input[type="range"]{
+    height: 100%;
+    width: 100%;
+}

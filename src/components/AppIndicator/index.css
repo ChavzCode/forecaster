@@ -1,0 +1,22 @@
+.indicator-ctn{
+    text-align: center;
+    border-right: 2px solid;
+}
+.white-theme .indicator-ctn{
+    border-color: #707070;
+}
+.black-theme .indicator-ctn{
+    border-color: #00D4FF;
+}
+.indicator-ctn:last-of-type{
+    border: 0;
+}
+.indicator-ctn h3{
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 500;
+}
+.result-ctn p{
+    font-size: 2rem;
+    margin: 1.2rem 0 0 0;
+}

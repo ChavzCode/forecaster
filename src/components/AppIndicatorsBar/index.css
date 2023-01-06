@@ -1,0 +1,20 @@
+.indicators-bar-ctn{
+    background-color: #0A2540;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 2.5rem;
+    padding: 4rem 3rem 0rem 3rem;
+}
+.indicators-bar-ctn h3{
+    color: #F6F9FC;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+.sliders-ctn .slider-ctn:last-of-type {
+   border: 0;
+   margin-bottom: 0;
+   padding-bottom: 1rem;
+}
