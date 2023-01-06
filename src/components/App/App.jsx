@@ -7,12 +7,6 @@ import AppIndicatorsBar from '../AppIndicatorsBar/AppIndicatorsBar'
 import './App.css'
 
 function App() {
-  const {
-    x,
-    y
-  } = useContext(AppContext);
-
-
   return (
     <React.Fragment>
       <NavBar/>

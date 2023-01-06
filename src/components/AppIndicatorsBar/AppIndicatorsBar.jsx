@@ -28,7 +28,7 @@ function AppIndicatorsBar() {
           max={3}
           step={0.1}
           variable={driverPay}
-          setVariable={setDriverPay} 
+          setVariable={setDriverPay}
         />
         <AppSlider
           property="Miles per Galon"

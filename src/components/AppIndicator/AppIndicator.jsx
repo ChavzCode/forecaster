@@ -1,12 +1,12 @@
 import React from 'react'
 import './index.css'
 
-function AppIndicator({value}) {
+function AppIndicator({keys, value}) {
   return (
     <div className='indicator-ctn'>
-        <h3>Titulo</h3>
+        <h3>{keys}</h3>
         <div className='result-ctn'>
-            <p>15000</p>
+            <p>{`${value}$`}</p>
         </div>
     </div>
   )
