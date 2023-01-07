@@ -6,18 +6,22 @@ const AppContext = React.createContext();
 function AppProvider(props) {
   //Layout Control
 
-  //Context Values
-  const [lane, setLane] = useState('');
-  const [rate, setRate] = useState(0);
-  const [miles, setMiles] = useState(0);
-  const [driverPay, setDriverPay] = useState(0);
-  const [milesPerGalon, setMilesPerGalon] = useState(0);
-  const [fuelPrice, setFuelPrice] = useState(0);
-  const [insurance, setInsurance] = useState(0);
-  const [dispatchFee, setDispatchFee] = useState(0);
-  const [factoringFee, setFactoringFee] = useState(0);
-
+  
+  //Data
+  const defaultData = [
+    { property: "lane", value: "" },
+    { property: "rate", value: 0 },
+    { property: "miles", value: 0 },
+    { property: "driverPay", value: 0 },
+    { property: "milesPerGalon", value: 0 },
+    { property: "fuelPrice", value: 0 },
+    { property: "insurance", value: 0 },
+    { property: "dispatchFee", value: 0 },
+    { property: "factoringFee", value: 0 }
+  ]
+  
   //Indicators
+  const [data, setData] = useState(defaultData);
   const [grossRev, setGrossRev] = useState(0);
   const [netRev, setNetRev] = useState(0);
   const [expenses, setExpenses] = useState(0);
@@ -28,75 +32,107 @@ function AppProvider(props) {
   const [dispatchCost, setDispatchCost] = useState(0);
   const [factoringCost, setFactoringCost] = useState(0);
 
-  //Calculations
-  let calculateInsuranceCost = () => {
+  //Utilizar un objeto en vez de cambiar los valores directamente
+  let updateIndicators = () => {
     try {
-      const daysTrip = miles/600;
-      const insuranceCostDaily = insurance / 31;
-      const insuranceCostTrip = insuranceCostDaily * daysTrip;
+      const laneTrip = data[0].value;
+      const rateTrip = data[1].value;
+      const milesTrip = data[2].value;
+      const driverPayTrip = data[3].value;
+      const milesPerGalonTrip = data[4].value;
+      const fuelPriceTrip = data[5].value;
+      const insuranceTrip = data[6].value;
+      const dispatchFee = data[7].value;
+      const factoringFee = data[8].value;
+
+      //Calculations
+      let daysInvestedTrip = milesTrip / 600;
+      let insuranceCostDaily = insuranceTrip / 31;
+      let insuranceCostTrip = (daysInvestedTrip * insuranceCostDaily).toFixed(
+        2
+      );
+      let galonsTrip = milesTrip / milesPerGalonTrip;
+      let fuelCostTrip =
+        galonsTrip > 0 && fuelPriceTrip > 0
+          ? (galonsTrip * fuelPriceTrip).toFixed(2)
+          : 0;
+      let driverCostTrip = (driverPayTrip * milesTrip).toFixed(2);
+      let dispatchCostTrip = (rateTrip * (dispatchFee / 100)).toFixed(2);
+      let factoringCostTrip = (rateTrip * (factoringFee / 100)).toFixed(2);
+      let expensesTrip =
+        Number(insuranceCostTrip) +
+        Number(fuelCostTrip) +
+        Number(driverCostTrip) +
+        Number(dispatchCostTrip) +
+        Number(factoringCostTrip);
+
+      //SetIndicators
+      setGrossRev(rateTrip);
+      setNetRev((rateTrip - expensesTrip).toFixed(2));
+      setExpenses(expensesTrip);
       setInsuranceCost(insuranceCostTrip);
-    } catch (error) {
-      console.log(error) 
+      setFuelCost(fuelCostTrip);
+      setDollarPerMile(
+        rateTrip > 0 && milesTrip > 0 ? (rateTrip / milesTrip).toFixed(2) : 0
+      );
+      setDriverCost(driverCostTrip);
+      setDispatchCost(dispatchCostTrip);
+      setFactoringCost(factoringCostTrip);
+    } catch (err) {
+      console.log(err);
     }
-  } 
+  };
+
+  let updateData = (target) => {
+    let index = data.findIndex((variable) => variable.property === target.name);
+    let newData = [...data];
+    newData[index].value = target.value;
+    setData(newData);
+    updateIndicators();
+  };
+
+  let saveIndicators = (e) => {
+    console.log(e)
+  }
+
+  let cleanIndicators = (e) => {
+    console.log(defaultData)
+  }
   
-
-
-  // let calculateIndicators = () => {
-  //   try {
-  //     let grossRevTrip = rate;
-  //     // let netRev = grossRev - expenses
-
-  //     if (milesPerGalon > 0){
-        
-  //     }
-      
-  //     let timeInvesment =  miles/600;
-  //     //Insurance
-  //     let insuranceDaily = insurance/31;
-  //     let totalInsurance = insuranceDaily * timeInvesment; 
-  //     //Fuel
-  //     let fuelGalonsTrip = miles/milesPerGalon;
-  //     let fuelCostTrip  = fuelGalonsTrip * fuelPrice;
-  //     //Dollar per Mile
-  //     let dollarXMile = rate/miles;
-  //     //Driver Cost
-  //     let driverCostTrip = driverPay * miles;
-  //     //Dispatch Cost
-  //     let dispatchCostTrip = grossRevTrip * (dispatchFee / 100);
-  //     //Factoring Cost
-  //     let factoringCostTrip = grossRevTrip * (factoringFee / 100);
-  //     let expensesTrip = totalInsurance + fuelCostTrip + driverCostTrip + dispatchCostTrip + factoringCostTrip;
-  //     let netRevenueTrip = grossRevTrip - expensesTrip;   
-  //   } catch (error) {
-      
-  //   }
-  // }
-  // calculateIndicators();
-
   //Return Values
   return (
     <AppContext.Provider
       value={{
-        lane, setLane,
-        rate, setRate,
-        miles, setMiles,
-        driverPay, setDriverPay,
-        milesPerGalon, setMilesPerGalon,
-        fuelPrice, setFuelPrice,
-        insurance, setInsurance,
-        dispatchFee, setDispatchFee,
-        factoringFee, setFactoringFee,
-        grossRev, setGrossRev,
-        netRev, setNetRev,
-        expenses, setExpenses,
-        insuranceCost, setInsuranceCost,
-        fuelCost, setFuelCost,
-        dollarPerMile, setDollarPerMile,
-        driverCost, setDriverCost,
-        dispatchCost, setDispatchCost,
-        factoringCost, setFactoringCost,
-        calculateInsuranceCost
+        lane: data[0],
+        rate: data[1],
+        miles: data[2],
+        driverPay: data[3],
+        milesPerGalon: data[4],
+        fuelPrice: data[5],
+        insurance: data[6],
+        dispatchFee: data[7],
+        factoringFee: data[8],
+        grossRev,
+        setGrossRev,
+        netRev,
+        setNetRev,
+        expenses,
+        setExpenses,
+        insuranceCost,
+        setInsuranceCost,
+        fuelCost,
+        setFuelCost,
+        dollarPerMile,
+        setDollarPerMile,
+        driverCost,
+        setDriverCost,
+        dispatchCost,
+        setDispatchCost,
+        factoringCost,
+        setFactoringCost,
+        updateData,
+        saveIndicators,
+        cleanIndicators
       }}
     >
       {props.children}

@@ -6,17 +6,11 @@ import "./index.css";
 function AppIndicatorsBar() {
   const {
     driverPay,
-    setDriverPay,
     milesPerGalon,
-    setMilesPerGalon,
     fuelPrice,
-    setFuelPrice,
     insurance,
-    setInsurance,
     dispatchFee,
-    setDispatchFee,
-    factoringFee,
-    setFactoringFee,
+    factoringFee
   } = useContext(AppContext);
 
   return (
@@ -24,46 +18,46 @@ function AppIndicatorsBar() {
       <h3>Indicators</h3>
       <div className="sliders-ctn">
         <AppSlider
-          property="Driver $xM"
+          title="Driver $xM"
           max={3}
           step={0.1}
-          variable={driverPay}
-          setVariable={setDriverPay}
+          property={driverPay.property}
+          value={driverPay.value}
         />
         <AppSlider
-          property="Miles per Galon"
+          title="Miles per Galon"
           max={10}
           step={0.1}
-          variable={milesPerGalon}
-          setVariable={setMilesPerGalon}
+          property={milesPerGalon.property}
+          value={milesPerGalon.value}
         />
         <AppSlider
-          property="Fuel Price $"
+          title="Fuel Price $"
           max={10}
           step={0.1}
-          variable={fuelPrice}
-          setVariable={setFuelPrice}
+          property={fuelPrice.property}
+          value={fuelPrice.value}
         />
         <AppSlider
-          property="Insurance Monthly $"
+          title="Insurance Monthly $"
           max={10000}
           step={1}
-          variable={insurance}
-          setVariable={setInsurance}
+          property={insurance.property}
+          value={insurance.value}
         />
         <AppSlider
-          property="Dispatch Fee %"
+          title="Dispatch Fee %"
           max={10}
           step={0.1}
-          variable={dispatchFee}
-          setVariable={setDispatchFee}
+          property={dispatchFee.property}
+          value={dispatchFee.value}
         />
         <AppSlider
-          property="Factoring Fee %"
+          title="Factoring Fee %"
           max={10}
           step={0.1}
-          variable={factoringFee}
-          setVariable={setFactoringFee}
+          property={factoringFee.property}
+          value={factoringFee.value}
         />
       </div>
     </div>

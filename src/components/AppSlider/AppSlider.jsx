@@ -1,36 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
 import AppDualSelector from "../AppDualSelector/AppDualSelector";
+import { AppContext } from "../../context/AppContext";
 import "./index.css";
 
-function AppSlider({ property, max, step, variable, setVariable, dual }) {
+function AppSlider({ title, property, max, step, value, dual }) {
+  const { updateData } = useContext(AppContext);
+
   return (
     <div className="slider-ctn">
       {!dual ? (
         <React.Fragment>
           <input
             onChange={(e) => {
-              setVariable(e.target.value);
+              updateData(e.target);
             }}
             type="number"
             placeholder="0"
             min={0}
             max={max}
-            value={variable}
+            name={property}
+            value={value}
           />
-          <h4>{property}</h4>
+          <h4>{title}</h4>
           <input
             onChange={(e) => {
-              setVariable(e.target.value);
+              updateData(e.target);
             }}
             type="range"
-            value={variable}
+            name={property}
+            value={value}
             min={0}
             max={max}
             step={step}
           />
         </React.Fragment>
       ) : (
-        <h1></h1>
+        <React.Fragment></React.Fragment>
       )}
     </div>
   );
