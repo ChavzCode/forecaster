@@ -19,7 +19,7 @@ function AppProvider(props) {
     { property: "dispatchFee", value: 0 },
     { property: "factoringFee", value: 0 }
   ]
-  
+
   //Indicators
   const [data, setData] = useState(defaultData);
   const [grossRev, setGrossRev] = useState(0);
@@ -33,17 +33,17 @@ function AppProvider(props) {
   const [factoringCost, setFactoringCost] = useState(0);
 
   //Utilizar un objeto en vez de cambiar los valores directamente
-  let updateIndicators = () => {
+  let updateIndicators = (dataSet) => {
     try {
-      const laneTrip = data[0].value;
-      const rateTrip = data[1].value;
-      const milesTrip = data[2].value;
-      const driverPayTrip = data[3].value;
-      const milesPerGalonTrip = data[4].value;
-      const fuelPriceTrip = data[5].value;
-      const insuranceTrip = data[6].value;
-      const dispatchFee = data[7].value;
-      const factoringFee = data[8].value;
+      const laneTrip = dataSet[0].value;
+      const rateTrip = dataSet[1].value;
+      const milesTrip = dataSet[2].value;
+      const driverPayTrip = dataSet[3].value;
+      const milesPerGalonTrip = dataSet[4].value;
+      const fuelPriceTrip = dataSet[5].value;
+      const insuranceTrip = dataSet[6].value;
+      const dispatchFee = dataSet[7].value;
+      const factoringFee = dataSet[8].value;
 
       //Calculations
       let daysInvestedTrip = milesTrip / 600;
@@ -69,7 +69,7 @@ function AppProvider(props) {
       //SetIndicators
       setGrossRev(rateTrip);
       setNetRev((rateTrip - expensesTrip).toFixed(2));
-      setExpenses(expensesTrip);
+      setExpenses(expensesTrip.toFixed(2));
       setInsuranceCost(insuranceCostTrip);
       setFuelCost(fuelCostTrip);
       setDollarPerMile(
@@ -88,7 +88,7 @@ function AppProvider(props) {
     let newData = [...data];
     newData[index].value = target.value;
     setData(newData);
-    updateIndicators();
+    updateIndicators(data);
   };
 
   let saveIndicators = (e) => {
@@ -96,7 +96,8 @@ function AppProvider(props) {
   }
 
   let cleanIndicators = (e) => {
-    console.log(defaultData)
+    setData(defaultData);
+    updateIndicators(defaultData);
   }
   
   //Return Values
