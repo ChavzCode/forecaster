@@ -4,15 +4,20 @@ import NavBar from "../NavBar/NavBar";
 import AppDualSelector from "../AppDualSelector/AppDualSelector";
 import AppMetrics from "../AppMetrics/AppMetrics";
 import AppIndicatorsBar from "../AppIndicatorsBar/AppIndicatorsBar";
+import AppMetricsList from "../AppMetricsList/AppMetricsList";
 import "./App.css";
 
 function App() {
-  const { saveIndicators, cleanIndicators } = useContext(AppContext);
+  const { saveIndicators, cleanIndicators, savedIndicators} = useContext(AppContext);
   return (
     <React.Fragment>
       <NavBar />
       <div className="app-ctn">
-        <h1>Load Profitability</h1>
+        <div className="load-profit-ctn">
+          <h1>Load Profitability</h1>
+          {savedIndicators.length > 0 ? <AppMetricsList/> : <React.Fragment/>}
+          
+        </div>
         <AppDualSelector
           value1={"Save Indicators"}
           function1={saveIndicators}
@@ -21,6 +26,7 @@ function App() {
         />
         <AppMetrics />
         <AppIndicatorsBar />
+        {/* <AppFooter/> */}
       </div>
     </React.Fragment>
   );

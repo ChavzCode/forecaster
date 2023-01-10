@@ -1,12 +1,13 @@
 // Importar React
 import React, { useState } from "react";
+import useLocalStorage from "./useLocalStorage";
+
 //Create Context
 const AppContext = React.createContext();
 
 function AppProvider(props) {
   //Layout Control
 
-  
   //Data
   const defaultData = [
     { property: "lane", value: "" },
@@ -22,6 +23,7 @@ function AppProvider(props) {
 
   //Indicators
   const [data, setData] = useState(defaultData);
+  const {storageData, saveData} = useLocalStorage('indicatorsSaved', []);
   const [grossRev, setGrossRev] = useState(0);
   const [netRev, setNetRev] = useState(0);
   const [expenses, setExpenses] = useState(0);
@@ -91,8 +93,26 @@ function AppProvider(props) {
     updateIndicators(data);
   };
 
-  let saveIndicators = (e) => {
-    console.log(e)
+  let setIndicators = (e) => {
+    console.log(e);
+    let newData = storageData[e - 1];
+    setData(newData);
+    updateIndicators(newData)
+  }
+
+  let saveIndicators = (e) => { 
+    let indicatorsStoraged = storageData;
+    let currentMetrics = data;
+    let newData = [... indicatorsStoraged]
+    newData.push(currentMetrics)
+    saveData(newData);
+  }
+
+  let deleteStorageIndicator = (e) => {
+    let newData = [...storageData]
+    let index = e - 1
+    newData.splice(index, 1)
+    saveData(newData);
   }
 
   let cleanIndicators = (e) => {
@@ -133,7 +153,11 @@ function AppProvider(props) {
         setFactoringCost,
         updateData,
         saveIndicators,
-        cleanIndicators
+        cleanIndicators,
+        savedIndicators: storageData,
+        deleteIndicator: deleteStorageIndicator,
+        updateIndicators,
+        setIndicators
       }}
     >
       {props.children}

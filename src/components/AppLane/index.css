@@ -10,6 +10,7 @@
     border-right: 0;
 }
 .lane-ctn .entry-ctn h4{
+    position: relative;
     margin: 0 0 0.5rem 2rem;
     font-size: 1.6rem;
     font-weight: 300;
@@ -29,4 +30,14 @@
 }
 .entry-ctn:last-child input{
     border: 0;
+}
+.entry-ctn h4::after{
+    content: '';
+    background-color: #00D4FF;
+    position: absolute;
+    width: 2rem; height: 0.75rem;
+    right: 1;
+    top: 0.5rem;
+    margin-left: 1rem;
+    border-radius: 1rem;
 }
