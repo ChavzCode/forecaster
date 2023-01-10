@@ -8,12 +8,13 @@
     position: fixed;
 }
 .ctn-navbar{
-    padding: 2rem;
+    padding: 2.5rem;
     text-align: center;
 }
 .ctn-navbar .haulit-isotype{
+    padding-bottom: 3rem;
+    padding-top: 2rem;
     margin-bottom: 2rem;
-    font-size: 6rem;
     border-bottom: 1px solid #F6F9FC;
 }
 .nav{

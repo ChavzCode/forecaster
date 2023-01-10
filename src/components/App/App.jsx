@@ -5,6 +5,7 @@ import AppDualSelector from "../AppDualSelector/AppDualSelector";
 import AppMetrics from "../AppMetrics/AppMetrics";
 import AppIndicatorsBar from "../AppIndicatorsBar/AppIndicatorsBar";
 import AppMetricsList from "../AppMetricsList/AppMetricsList";
+import AppFooter from "../AppFooter/AppFooter";
 import "./App.css";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
         />
         <AppMetrics />
         <AppIndicatorsBar />
-        {/* <AppFooter/> */}
+        <AppFooter/>
       </div>
     </React.Fragment>
   );

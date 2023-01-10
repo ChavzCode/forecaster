@@ -10,7 +10,7 @@ function NavBar() {
       <div className='ctn-navbar'>
           {/* NavBar Logo */}
           <div className='haulit-isotype'>
-            <AiFillPieChart/>
+            <img src="src/assets/haulit-isotype.svg" alt="X"/>
           </div>
 
           <nav className='nav'>

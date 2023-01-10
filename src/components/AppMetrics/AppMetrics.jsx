@@ -43,6 +43,8 @@ function AppMetrics() {
         <AppMetricBar theme="white-theme" metrics={metrics2} />
         <AppMetricBar theme="white-theme" metrics={metrics3} />
       </div>
+      {/* <div className="charts-ctn">
+      </div> */}
     </div>
   );
 }
