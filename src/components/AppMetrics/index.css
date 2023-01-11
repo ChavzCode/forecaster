@@ -4,3 +4,21 @@
 .app-results{
     margin: 5rem 0; 
 }
+.charts-ctn{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.chart{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 20rem;
+    width: 30rem;
+    margin: 0;
+}
+.chart h4{
+    margin-bottom: 2rem;
+    text-align: center;
+    color: rgb(112, 112, 112);   
+}

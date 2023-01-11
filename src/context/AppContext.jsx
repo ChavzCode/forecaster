@@ -18,12 +18,20 @@ function AppProvider(props) {
     { property: "fuelPrice", value: 0 },
     { property: "insurance", value: 0 },
     { property: "dispatchFee", value: 0 },
-    { property: "factoringFee", value: 0 }
-  ]
+    { property: "factoringFee", value: 0 },
+  ];
+
+  const expensesDefaultDist = {
+    "Insurance Cost": 1,
+    "Fuel Cost": 1,
+    "Driver Cost": 1,
+    "Dispatch Cost": 1,
+    "Factoring Cost": 1,
+  };
 
   //Indicators
   const [data, setData] = useState(defaultData);
-  const {storageData, saveData} = useLocalStorage('indicatorsSaved', []);
+  const {storageData, saveData } = useLocalStorage("indicatorsSaved", []);
   const [grossRev, setGrossRev] = useState(0);
   const [netRev, setNetRev] = useState(0);
   const [expenses, setExpenses] = useState(0);
@@ -33,6 +41,11 @@ function AppProvider(props) {
   const [driverCost, setDriverCost] = useState(0);
   const [dispatchCost, setDispatchCost] = useState(0);
   const [factoringCost, setFactoringCost] = useState(0);
+  const [expensesDistribution, setExpensesDistribution] = useState(expensesDefaultDist);
+  const [netRevData, setNetRevData] = useState({
+    Expenses: 50,
+    Revenue: 50
+  })
 
   //Utilizar un objeto en vez de cambiar los valores directamente
   let updateIndicators = (dataSet) => {
@@ -67,10 +80,41 @@ function AppProvider(props) {
         Number(driverCostTrip) +
         Number(dispatchCostTrip) +
         Number(factoringCostTrip);
+      let netRevTrip = (rateTrip - expensesTrip).toFixed(2)
+    
+      //Expenses Distribution
+      let expensesDistributionTrip
+      if (insuranceCostTrip > 0 || fuelCostTrip > 0 || driverCostTrip > 0 || dispatchCostTrip > 0 || factoringCostTrip > 0){
+        expensesDistributionTrip = {
+          "Insurance Cost": insuranceCostTrip,
+          "Fuel Cost": fuelCostTrip,
+          "Driver Cost": driverCostTrip,
+          "Dispatch Cost": dispatchCostTrip,
+          "Factoring Cost": factoringCostTrip,
+        };
+      }else{
+        expensesDistributionTrip = expensesDefaultDist;
+      }
 
+      //Revenue %
+      let expensesPerc = ((expensesTrip / rateTrip) * 100)
+      let revenuePerc = ((netRevTrip / rateTrip) * 100) 
+      let expensesVsRevenue;
+      if(rateTrip > 0){
+        expensesVsRevenue = {
+          "Expenses": expensesPerc,
+          "Revenue": revenuePerc 
+        }
+      }else{
+        expensesVsRevenue = {
+          "Expenses": 50,
+          "Revenue": 50 
+        }
+      }
+      
       //SetIndicators
       setGrossRev(rateTrip);
-      setNetRev((rateTrip - expensesTrip).toFixed(2));
+      setNetRev(netRevTrip);
       setExpenses(expensesTrip.toFixed(2));
       setInsuranceCost(insuranceCostTrip);
       setFuelCost(fuelCostTrip);
@@ -80,6 +124,8 @@ function AppProvider(props) {
       setDriverCost(driverCostTrip);
       setDispatchCost(dispatchCostTrip);
       setFactoringCost(factoringCostTrip);
+      setExpensesDistribution(expensesDistributionTrip);
+      setNetRevData(expensesVsRevenue);
     } catch (err) {
       console.log(err);
     }
@@ -94,32 +140,31 @@ function AppProvider(props) {
   };
 
   let setIndicators = (e) => {
-    console.log(e);
     let newData = storageData[e - 1];
     setData(newData);
-    updateIndicators(newData)
-  }
+    updateIndicators(newData);
+  };
 
-  let saveIndicators = (e) => { 
+  let saveIndicators = (e) => {
     let indicatorsStoraged = storageData;
     let currentMetrics = data;
-    let newData = [... indicatorsStoraged]
-    newData.push(currentMetrics)
+    let newData = [...indicatorsStoraged];
+    newData.push(currentMetrics);
     saveData(newData);
-  }
+  };
 
   let deleteStorageIndicator = (e) => {
-    let newData = [...storageData]
-    let index = e - 1
-    newData.splice(index, 1)
+    let newData = [...storageData];
+    let index = e - 1;
+    newData.splice(index, 1);
     saveData(newData);
-  }
+  };
 
   let cleanIndicators = (e) => {
     setData(defaultData);
     updateIndicators(defaultData);
-  }
-  
+  };
+
   //Return Values
   return (
     <AppContext.Provider
@@ -157,7 +202,9 @@ function AppProvider(props) {
         savedIndicators: storageData,
         deleteIndicator: deleteStorageIndicator,
         updateIndicators,
-        setIndicators
+        setIndicators,
+        expensesDistribution,
+        netRevData
       }}
     >
       {props.children}
