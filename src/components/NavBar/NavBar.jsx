@@ -14,8 +14,8 @@ function NavBar() {
           </div>
 
           <nav className='nav'>
-            <NavIcon Icon={MdOutlineDashboard} />
-            <NavIcon Icon={AiOutlineLineChart} />
+            <NavIcon sectionName='loadProfit' Icon={MdOutlineDashboard} />
+            <NavIcon sectionName="forecaster" Icon={AiOutlineLineChart} />
           </nav>
       </div>
     </div>

@@ -30,6 +30,7 @@ function AppProvider(props) {
   };
 
   //Indicators
+  const [navSection, setNavSection] = useState('loadProfit');
   const [data, setData] = useState(defaultData);
   const {storageData, saveData } = useLocalStorage("indicatorsSaved", []);
   const [grossRev, setGrossRev] = useState(0);
@@ -204,7 +205,9 @@ function AppProvider(props) {
         updateIndicators,
         setIndicators,
         expensesDistribution,
-        netRevData
+        netRevData,
+        navSection,
+        setNavSection
       }}
     >
       {props.children}

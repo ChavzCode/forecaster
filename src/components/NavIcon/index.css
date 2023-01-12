@@ -2,3 +2,21 @@
     font-size: 4rem;
     padding: 2rem 0
 }
+.section-icon-ctn{
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+.section-icon-ctn:hover{
+    color: #00D4FF;
+}
+.section-selected::before{
+    content: "";
+    width: 0rem;
+    height: 100%;
+    position: absolute;
+    background-color: #F6F9FC;
+    left: 0;
+    box-shadow: 0rem -0.1rem 3px 3px #F6F9FC;
+}
