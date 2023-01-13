@@ -4,13 +4,14 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { AiFillInstagram, AiFillFacebook } from "react-icons/ai";
 import { FaTiktok } from "react-icons/fa";
+import logoHaulitUrl from "../../assets/logo-haulit.svg"
 
 function AppFooter() {
   return (
     <footer>
       <div className="footer-ctn">
         <div className="logo-ctn">
-          <img src="src/assets/logo-haulit.svg" alt="Logo Haulit" />
+          <img src={logoHaulitUrl} alt="Logo Haulit" />
         </div>
 
         <div className="footer-entry">

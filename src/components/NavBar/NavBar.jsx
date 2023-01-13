@@ -2,6 +2,7 @@ import React from 'react'
 import { MdOutlineDashboard } from 'react-icons/md'
 import { AiOutlineLineChart, AiFillPieChart } from 'react-icons/ai';
 import NavIcon from '../NavIcon/NavIcon'
+import haulitIsotypeUrl from '../../assets/haulit-isotype.svg'
 import './index.css'
 
 function NavBar() {
@@ -10,7 +11,7 @@ function NavBar() {
       <div className='ctn-navbar'>
           {/* NavBar Logo */}
           <div className='haulit-isotype'>
-            <img src="src/assets/haulit-isotype.svg" alt="X"/>
+            <img src={haulitIsotypeUrl} alt="X"/>
           </div>
 
           <nav className='nav'>
